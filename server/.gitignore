@@ -491,5 +491,9 @@ $RECYCLE.BIN/
 server/api/appsettings.json
 appsettings.json
 
+server/dataaccess/scaffold.sh
+
+
+
 
 
