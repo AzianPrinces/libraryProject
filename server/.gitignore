@@ -5,6 +5,10 @@
 
 # dotenv files
 .env
+*.sh
+
+
+
 
 # User-specific files
 *.rsuser
@@ -482,3 +486,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+#configs
+server/api/appsettings.json
+
