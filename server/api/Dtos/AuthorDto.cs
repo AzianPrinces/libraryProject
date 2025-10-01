@@ -1,16 +1,16 @@
-﻿using dataaccess.Entities;
-
+﻿
+using dataaccess.Entities;
 
 namespace api.DTOs;
 
-public class GenreDto
+public class AuthorDto
 {
-    public GenreDto(Genre entity)
+    public AuthorDto(Author entity)
     {
         Id = entity.Id;
         Name = entity.Name;
         Createdat = entity.Createdat;
-        Books = entity.Books?.Select(b => b.Id).ToList() ?? new List<string>();
+        BookIds = entity.Books?.Select(b => b.Id).ToList() ?? new List<string>();
     }
 
     public string Id { get; set; } = null!;
@@ -18,5 +18,6 @@ public class GenreDto
     public string Name { get; set; } = null!;
 
     public DateTime Createdat { get; set; }
-    public List<string> Books { get; set; } = new();
+
+    public List<string> BookIds { get; set; } = new List<string>();
 }

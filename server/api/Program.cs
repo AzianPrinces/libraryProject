@@ -31,7 +31,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
-builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<ILibraryService, LibraryService>();
 
 
 

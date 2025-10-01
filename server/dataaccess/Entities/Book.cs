@@ -11,7 +11,7 @@ public partial class Book
 
     public int Pages { get; set; }
 
-    public DateTime? Createdat { get; set; }
+    public DateTime Createdat { get; set; }
 
     public string? Genreid { get; set; }
 
