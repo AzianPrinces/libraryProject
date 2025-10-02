@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet, Link } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    return (
+        <div>
+            <h1 >📚 Library Project</h1>
+            <nav>
+                <Link to="/genres">Genres</Link> |{" "}
+                <Link to="/books">Books</Link> |{" "}
+                <Link to="/authors">Authors</Link>
+                <button className="btn btn-primary">Test Button</button>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+                <h1 className="text-4xl font-bold text-red-500 bg-yellow-200 p-4">
+                    🚀 Tailwind is working!
+                </h1>
+
+
+
+            </nav>
+            <hr />
+            <Outlet />
+        </div>
+    );
 }
-
-export default App
