@@ -4,12 +4,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App.tsx';
 import GenresPage from './pages/GenresPage.tsx';
-import BooksPage from './pages/BooksPage.tsx';
+import {BooksPage} from './pages/BooksPage.tsx';
 import AuthorsPage from './pages/AuthorsPage.tsx';
+import NavBar from "./pages/NavBar.tsx";
+import CreateBook from "./pages/CreateBook.tsx";
 import "./index.css";
 
 import { DevTools } from "jotai-devtools";
 import "jotai-devtools/styles.css";
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -20,6 +23,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Route path="genres" element={<GenresPage />} />
                     <Route path="books" element={<BooksPage />} />
                     <Route path="authors" element={<AuthorsPage />} />
+                    <Route path="navbar" element={<NavBar />} />
+                    <Route path="create-book" element={<CreateBook />} />
                 </Route>
             </Routes>
         </BrowserRouter>

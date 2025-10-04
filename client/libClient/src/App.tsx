@@ -1,25 +1,23 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import NavBar from "./pages/NavBar";
 
 export default function App() {
     return (
+        <div data-theme="forest" className="min-h-screen">
         <div>
-            <h1 >📚 Library Project</h1>
-            <nav>
-                <Link to="/genres">Genres</Link> |{" "}
-                <Link to="/books">Books</Link> |{" "}
-                <Link to="/authors">Authors</Link>
-                <button className="btn btn-primary">Test Button</button>
 
+        <div className=" flex justify-center">
+            <NavBar />
+            <h1 className=" font-medium text-4xl text-[#FCC61D]  p-2 rounded">My Library</h1>
 
-                <h1 className="text-4xl font-bold text-red-500 bg-yellow-200 p-4">
-                    🚀 Tailwind is working!
-                </h1>
+        </div>
 
 
 
-            </nav>
             <hr />
             <Outlet />
+
+        </div>
         </div>
     );
 }
