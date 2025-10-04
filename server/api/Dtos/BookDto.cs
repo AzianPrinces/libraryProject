@@ -15,6 +15,7 @@ public class BookDto
         if (entity.Genre != null)
             GenreId = entity.Genreid;
         AuthorsIds = entity.Authors?.Select(a => a.Id).ToList() ?? new List<string>();
+        
     }
 
     public string Id { get; set; } = null!;
