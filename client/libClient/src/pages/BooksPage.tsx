@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 
 import { useAtom } from "jotai";
 import {authorsAtom, booksAtom, genresAtom, loadingAtom} from "../state/booksAtom";
-import {type GenreDto, LibraryClient} from "../models/generated-client";
+import {type GenreDto} from "../models/generated-client";
 import type { BookDto } from "../models/generated-client";
 import type { AuthorDto } from "../models/generated-client";
 import { useNavigate } from "react-router-dom";
+
+import {libraryClient} from "../models/baseUrl";
 
 
 
@@ -20,10 +22,10 @@ export function BooksPage() {
 
     // Fetch books and update the book's
     useEffect(() => {
-        const api = new LibraryClient("http://localhost:5028");
+        //const api = new LibraryClient(libraryClient);
         setLoading(true);
 
-        api.getBooks()
+        libraryClient.getBooks()
             .then((data: BookDto[]) => {
                 console.log("Fetched books:", data);
                 setBooks(data);
@@ -34,10 +36,10 @@ export function BooksPage() {
 
     // Fetch authors '
     useEffect(() => {
-        const api = new LibraryClient("http://localhost:5028");
+        //const api = new LibraryClient("http://localhost:5028");
         setLoading(true);
 
-        api.getAuthors()
+        libraryClient.getAuthors()
             .then((data: AuthorDto[]) => {
                 console.log("Fetched authors:", data);
                 setAuthors(data);
@@ -57,10 +59,10 @@ export function BooksPage() {
 
     // Fetch genres
     useEffect(() => {
-        const api = new LibraryClient("http://localhost:5028");
+        //const api = new LibraryClient("http://localhost:5028");
         setLoading(true);
 
-        api.getGenres()
+        libraryClient.getGenres()
             .then((data: GenreDto[]) => {
                 console.log("Fetched genres:", data);
                 setGenres(data);
@@ -85,10 +87,10 @@ export function BooksPage() {
     const handleDelete = async (bookId: string) => {
         if(!confirm("Are you sure you want to delete this book?")) return;
 
-        const api = new LibraryClient("http://localhost:5028");
+        //const api = new LibraryClient("http://localhost:5028");
 
         try{
-            await api.deleteBook(bookId);
+            await libraryClient.deleteBook(bookId);
             setBooks(books.filter((b) => b.id !== bookId));
             alert("Book deleted successfully");
         } catch (err) {

@@ -6,7 +6,9 @@ import{
     type GenreDto,
     type BookDto,
     type UpdateBookRequestDto,
-    LibraryClient } from "../models/generated-client";
+     } from "../models/generated-client";
+
+import {libraryClient} from "../models/baseUrl";
 
 export default function EditBook() {
 
@@ -29,16 +31,16 @@ export default function EditBook() {
     const [loadingLists, setLoadingLists] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const api = new LibraryClient("http://localhost:5028");
+    //const api = new LibraryClient("http://localhost:5028");
 
     useEffect(() => {
         if (!bookId) return;
         const load = async () => {
             try {
                 const [authorsRes, genresRes, bookRes] = await Promise.all([
-                    api.getAuthors?.() ?? [],
-                    api.getGenres?.() ?? [],
-                    api.getBooks().then((b) => (b as BookDto[]).find((x) => x.id === bookId)),
+                    libraryClient.getAuthors?.() ?? [],
+                    libraryClient.getGenres?.() ?? [],
+                    libraryClient.getBooks().then((b) => (b as BookDto[]).find((x) => x.id === bookId)),
 
                 ]);
 
@@ -90,12 +92,12 @@ export default function EditBook() {
             let resolvedGenreId = genreId as string | undefined;
 
             if (newAuthorName.trim()) {
-                const createdAuthor = await api.createAuthor({
+                const createdAuthor = await libraryClient.createAuthor({
                     name: newAuthorName.trim() });
                 resolvedAuthorId = createdAuthor.id!;
             }
             if (newGenreName.trim()) {
-                const createGenre = await api.createGenre({
+                const createGenre = await libraryClient.createGenre({
                     name: newGenreName.trim()});
                 resolvedGenreId = createGenre.id!;
             }
@@ -110,7 +112,7 @@ export default function EditBook() {
                 imageurl: imageurl || undefined,
             };
 
-            await api.updateBook(updateDto);
+            await libraryClient.updateBook(updateDto);
             alert("Book updated successfully!");
             navigate("/books");
         } catch (err) {

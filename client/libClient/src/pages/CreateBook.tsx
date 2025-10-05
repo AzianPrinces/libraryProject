@@ -5,8 +5,10 @@ import {
   type CreateBookRequestDto,
   type GenreDto,
   type BookDto,
-  LibraryClient,
+  
 } from "../models/generated-client.ts";
+
+import {libraryClient} from "../models/baseUrl";
 
 export default function CreateBook() {
   const navigate = useNavigate();
@@ -30,14 +32,14 @@ export default function CreateBook() {
 
   const [error, setError] = useState<string | null>(null);
 
-  const api = new LibraryClient("http://localhost:5028");
+  //const api = new LibraryClient("http://localhost:5028");
 
   useEffect(() => {
     const load = async () => {
       try {
         const [authorsRes, genresRes] = await Promise.all([
-          api.getAuthors?.() ?? [],
-          api.getGenres?.() ?? [],
+          libraryClient.getAuthors?.() ?? [],
+          libraryClient.getGenres?.() ?? [],
         ]);
         setAuthor((authorsRes as AuthorDto[]) ?? []);
         setGenre((genresRes as GenreDto[]) ?? []);
@@ -78,25 +80,25 @@ export default function CreateBook() {
 
       // Create author if user provided a new name
       if (newAuthorName.trim()) {
-        const createdAuthor = await api.createAuthor({ name: newAuthorName.trim() });
+        const createdAuthor = await libraryClient.createAuthor({ name: newAuthorName.trim() });
         resolvedAuthorId = createdAuthor.id!;
       }
 
       // Create genre if user provided a new name
       if (newGenreName.trim()) {
-        const createdGenre = await api.createGenre({ name: newGenreName.trim() });
+        const createdGenre = await libraryClient.createGenre({ name: newGenreName.trim() });
         resolvedGenreId = createdGenre.id!;
       }
 
       // Create the book first (CreateBook only accepts title and pages per generated client)
-      const bookDto = (await api.createBook({
+      const bookDto = (await libraryClient.createBook({
         title: title.trim(),
         pages: Number(pages),
           imageurl: imageurl || undefined,
       } as CreateBookRequestDto)) as BookDto;
 
       // Then update the book to attach author and genre
-      await api.updateBook({
+      await libraryClient.updateBook({
         bookIdForLookupReference: bookDto.id!,
         newPageCount: Number(pages),
         newTitle: title.trim(),

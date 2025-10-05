@@ -8,11 +8,15 @@ export default function App() {
 
         <div className=" flex justify-center">
             <NavBar />
-            <h1 className=" font-medium text-4xl text-[#FCC61D]  p-2 rounded">My Library</h1>
+
+            <div className="p-8 text-center">
+                <h1 className="text-4xl font-bold text-yellow-400 mb-4">📚 Welcome to My Library</h1>
+                <p className="text-lg mb-6 opacity-80">
+                    It is a not fully completed library management system yet, stay updated!
+                </p>
+            </div>
 
         </div>
-
-
 
             <hr />
             <Outlet />

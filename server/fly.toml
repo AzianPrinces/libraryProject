@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for server-withered-library-3067 on 2025-10-01T21:39:13+02:00
+# fly.toml app configuration file generated for server-withered-library-3067-holy-bush-2253 on 2025-10-05T21:21:09+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'server-withered-library-3067'
+app = 'server-withered-library-3067-holy-bush-2253'
 primary_region = 'fra'
 
 [build]
@@ -18,5 +18,3 @@ primary_region = 'fra'
 
 [[vm]]
   size = 'shared-cpu-1x'
-  
-
