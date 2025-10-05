@@ -16,6 +16,7 @@ export default function CreateBook() {
   // Use string IDs as per generated client (ids are strings)
   const [authorId, setAuthorId] = useState<string | "">("");
   const [genreId, setGenreId] = useState<string | "">("");
+  const [imageurl, setImageUrl] = useState<string>("");
 
   // Allow creating new author/genre inline
   const [newAuthorName, setNewAuthorName] = useState("");
@@ -91,6 +92,7 @@ export default function CreateBook() {
       const bookDto = (await api.createBook({
         title: title.trim(),
         pages: Number(pages),
+          imageurl: imageurl || undefined,
       } as CreateBookRequestDto)) as BookDto;
 
       // Then update the book to attach author and genre
@@ -100,6 +102,7 @@ export default function CreateBook() {
         newTitle: title.trim(),
         authorsIds: resolvedAuthorId ? [resolvedAuthorId] : [],
         genreId: resolvedGenreId,
+          imageurl: imageurl || undefined,
       });
 
       navigate("/books");
@@ -205,7 +208,31 @@ export default function CreateBook() {
           />
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+          <div>
+              <label className="label">
+                  <span className="label-text">Book Cover Image URL</span>
+              </label>
+              <input
+                  type="text"
+                  className="input input-bordered w-full"
+                  placeholder="https://example.com/cover.jpg"
+                  value={imageurl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+              />
+          </div>
+
+          {imageurl && (
+              <div className="mt-4 flex justify-center">
+                  <img
+                      src={imageurl}
+                      alt="Book cover preview"
+                      className="w-32 h-48 object-cover rounded-lg shadow-md"
+                  />
+              </div>
+          )}
+
+
+          {error && <p className="text-red-500">{error}</p>}
 
         <div className="card-actions justify-end">
           <button

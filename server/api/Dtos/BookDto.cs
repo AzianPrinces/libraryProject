@@ -14,6 +14,7 @@ public class BookDto
         Createdat = entity.Createdat;
         if (entity.Genre != null)
             GenreId = entity.Genreid;
+        Imageurl = entity.Imageurl;
         AuthorsIds = entity.Authors?.Select(a => a.Id).ToList() ?? new List<string>();
         
     }
@@ -24,9 +25,11 @@ public class BookDto
 
     public int Pages { get; set; }
 
-    public DateTime Createdat { get; set; }
+    public DateTime? Createdat { get; set; }
 
     public string? GenreId { get; set; }
+    
+    public string? Imageurl { get; set; }
 
     public List<string> AuthorsIds { get; set; }
 }

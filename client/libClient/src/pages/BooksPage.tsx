@@ -5,12 +5,16 @@ import {authorsAtom, booksAtom, genresAtom, loadingAtom} from "../state/booksAto
 import {type GenreDto, LibraryClient} from "../models/generated-client";
 import type { BookDto } from "../models/generated-client";
 import type { AuthorDto } from "../models/generated-client";
+import { useNavigate } from "react-router-dom";
+
 
 
 export function BooksPage() {
     const [books, setBooks] = useAtom(booksAtom);
     const [authors, setAuthors] = useAtom(authorsAtom);
     const [genres, setGenres] = useAtom(genresAtom);
+
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useAtom(loadingAtom);
 
@@ -78,6 +82,23 @@ export function BooksPage() {
 
     if (loading) return <p> Loading books...</p>;
 
+    const handleDelete = async (bookId: string) => {
+        if(!confirm("Are you sure you want to delete this book?")) return;
+
+        const api = new LibraryClient("http://localhost:5028");
+
+        try{
+            await api.deleteBook(bookId);
+            setBooks(books.filter((b) => b.id !== bookId));
+            alert("Book deleted successfully");
+        } catch (err) {
+            console.error("Error deleting book:", err);
+            alert("Failed to delete book");
+        }
+
+
+    }
+
     return (
         <div className="p-6">
             <h2 className="text-3xl font-bold mb-6">📖 Books</h2>
@@ -90,16 +111,35 @@ export function BooksPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {books.map((book) => (
-                        <div key={book.id} className="card bg-base-200 shadow-md">
+                        <div className="card bg-base-200 shadow-md">
+                            {book.imageurl && (
+                                <figure className="px-4 pt-4">
+                                    <img
+                                        src={book.imageurl}
+                                        alt={book.title}
+                                        className="rounded-xl w-full h-56 object-cover"
+                                    />
+                                </figure>
+                            )}
                             <div className="card-body">
                                 <h3 className="card-title">{book.title}</h3>
                                 <p>{book.pages} pages</p>
-                                <p className="text-sm opacity-70">Created: {book.createdat}</p>
                                 <p>Author: {getAuthorNames(book.authorsIds)}</p>
                                 <p>Genre: {getGenres(book.genreId)}</p>
+
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-sm btn-primary">Edit</button>
-                                    <button className="btn btn-sm btn-error">Delete</button>
+                                    <button
+                                        className="btn btn-sm btn-primary"
+                                        onClick={() => navigate(`/edit-book/${book.id}`)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="btn btn-sm btn-error"
+                                        onClick={() => handleDelete(book.id!)}
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         </div>

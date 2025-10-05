@@ -13,4 +13,6 @@ public class UpdateBookRequestDto
     [Required] [MinLength(1)] public string NewTitle { get; set; }
     [Required] public List<string> AuthorsIds { get; set; }
     public string? GenreId { get; set; }
+    
+    public string? Imageurl { get; set; }
 }

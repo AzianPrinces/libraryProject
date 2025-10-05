@@ -453,7 +453,7 @@ export class LibraryClient {
 export interface AuthorDto {
     id?: string;
     name?: string;
-    createdat?: string;
+    createdat?: string | undefined;
     bookIds?: string[];
 }
 
@@ -461,21 +461,23 @@ export interface BookDto {
     id?: string;
     title?: string;
     pages?: number;
-    createdat?: string;
+    createdat?: string | undefined;
     genreId?: string | undefined;
+    imageurl?: string | undefined;
     authorsIds?: string[];
 }
 
 export interface GenreDto {
     id?: string;
     name?: string;
-    createdat?: string;
+    createdat?: string | undefined;
     books?: string[];
 }
 
 export interface CreateBookRequestDto {
     pages: number;
     title: string;
+    imageurl?: string | undefined;
 }
 
 export interface UpdateBookRequestDto {
@@ -484,6 +486,7 @@ export interface UpdateBookRequestDto {
     newTitle: string;
     authorsIds: string[];
     genreId?: string | undefined;
+    imageurl?: string | undefined;
 }
 
 export interface CreateAuthorRequestDto {

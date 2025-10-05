@@ -42,7 +42,10 @@ public class LibraryService(LibraryDbContext ctx) : ILibraryService
             Pages = dto.Pages,
             Createdat = DateTime.UtcNow,
             Id = Guid.NewGuid().ToString(),
-            Title = dto.Title
+            Title = dto.Title,
+            Imageurl = dto.Imageurl,
+            
+            
         };
         ctx.Books.Add(book);
         await ctx.SaveChangesAsync();
@@ -58,6 +61,7 @@ public class LibraryService(LibraryDbContext ctx) : ILibraryService
         book.Pages = dto.NewPageCount;
         book.Title = dto.NewTitle;
         book.Genre = dto.GenreId != null ? ctx.Genres.First(g => g.Id == dto.GenreId) : null;
+        book.Imageurl = dto.Imageurl;
 
         book.Authors.Clear();
         dto.AuthorsIds.ForEach(id => book.Authors.Add(ctx.Authors.First(a => a.Id == id)));

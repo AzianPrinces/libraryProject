@@ -17,6 +17,6 @@ public class GenreDto
 
     public string Name { get; set; } = null!;
 
-    public DateTime Createdat { get; set; }
+    public DateTime? Createdat { get; set; }
     public List<string> Books { get; set; } = new();
 }

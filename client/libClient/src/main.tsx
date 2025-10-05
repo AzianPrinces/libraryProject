@@ -12,6 +12,7 @@ import "./index.css";
 
 import { DevTools } from "jotai-devtools";
 import "jotai-devtools/styles.css";
+import EditBook from "./pages/EditBook.tsx";
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -25,6 +26,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Route path="authors" element={<AuthorsPage />} />
                     <Route path="navbar" element={<NavBar />} />
                     <Route path="create-book" element={<CreateBook />} />
+                    <Route path="edit-book/:bookId" element={<EditBook />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>

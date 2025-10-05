@@ -372,7 +372,8 @@
           },
           "createdat": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "bookIds": {
             "type": "array",
@@ -398,9 +399,14 @@
           },
           "createdat": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "genreId": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageurl": {
             "type": "string",
             "nullable": true
           },
@@ -424,7 +430,8 @@
           },
           "createdat": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "books": {
             "type": "array",
@@ -451,6 +458,10 @@
           "title": {
             "type": "string",
             "minLength": 1
+          },
+          "imageurl": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -485,6 +496,10 @@
             }
           },
           "genreId": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageurl": {
             "type": "string",
             "nullable": true
           }

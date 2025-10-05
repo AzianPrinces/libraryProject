@@ -57,6 +57,7 @@ public partial class LibraryDbContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Createdat).HasColumnName("createdat");
             entity.Property(e => e.Genreid).HasColumnName("genreid");
+            entity.Property(e => e.Imageurl).HasColumnName("imageurl");
             entity.Property(e => e.Pages).HasColumnName("pages");
             entity.Property(e => e.Title).HasColumnName("title");
 
