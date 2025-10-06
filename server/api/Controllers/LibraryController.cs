@@ -14,10 +14,16 @@ public class LibraryController(ILibraryService libraryService) : ControllerBase
 
    
     [HttpGet(nameof(GetAuthors))]
-    public async Task<List<AuthorDto>> GetAuthors()
+    public async Task<List<Author>> GetAuthors(int skip, int take)
     {
-        return await libraryService.GetAuthors();
+        return await libraryService.GetAuthors(skip, take);
     }
+    [HttpGet(nameof(GetAuthorDtos))]
+    public async Task<List<AuthorDto>> GetAuthorDtos()
+    {
+        return await libraryService.GetAuthorDtos();
+    }
+
 
     [HttpGet(nameof(GetBooks))]
     public async Task<List<BookDto>> GetBooks()

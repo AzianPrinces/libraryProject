@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using api;
 using api.Services;
 using dataaccess;
@@ -24,6 +25,11 @@ builder.Services.AddDbContext<LibraryDbContext>((sp, options) =>
 {
     var appOptions = sp.GetRequiredService<IOptions<AppOptions>>().Value;
     options.UseNpgsql(appOptions.ConnectionString);
+});
+
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
 
 builder.Services.AddControllers();

@@ -8,6 +8,7 @@ import type { AuthorDto } from "../models/generated-client";
 import { useNavigate } from "react-router-dom";
 
 import {libraryClient} from "../models/baseUrl";
+import {resolveRefs} from "dotnet-json-refs";
 
 
 
@@ -15,6 +16,8 @@ export function BooksPage() {
     const [books, setBooks] = useAtom(booksAtom);
     const [authors, setAuthors] = useAtom(authorsAtom);
     const [genres, setGenres] = useAtom(genresAtom);
+    
+    
 
     const navigate = useNavigate();
 
@@ -28,7 +31,7 @@ export function BooksPage() {
         libraryClient.getBooks()
             .then((data: BookDto[]) => {
                 console.log("Fetched books:", data);
-                setBooks(data);
+                setBooks(resolveRefs(data));
             })
             .catch((err: BookDto[]) => console.error("Error fetching books:", err))
             .finally(() => setLoading(false));
@@ -39,10 +42,10 @@ export function BooksPage() {
         //const api = new LibraryClient("http://localhost:5028");
         setLoading(true);
 
-        libraryClient.getAuthors()
+        libraryClient.getAuthors(1, 5)
             .then((data: AuthorDto[]) => {
                 console.log("Fetched authors:", data);
-                setAuthors(data);
+                setAuthors(resolveRefs<Author>(data));
             })
             .catch((err: AuthorDto[]) => console.error("Error fetching authors:", err))
             .finally(() => setLoading(false));
@@ -65,7 +68,7 @@ export function BooksPage() {
         libraryClient.getGenres()
             .then((data: GenreDto[]) => {
                 console.log("Fetched genres:", data);
-                setGenres(data);
+                setGenres(resolveRefs(data));
             })
             .catch((err: GenreDto[]) => console.error("Error fetching genres:", err))
             .finally(() => setLoading(false));
@@ -112,7 +115,7 @@ export function BooksPage() {
             ) : (
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {books.map((book) => (
+                    {books!=undefined &&  books.length>0 && books.map((book) => (
                         <div className="card bg-base-200 shadow-md">
                             {book.imageurl && (
                                 <figure className="px-4 pt-4">

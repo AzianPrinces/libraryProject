@@ -10,7 +10,7 @@ export default function App() {
             <NavBar />
 
             <div className="p-8 text-center">
-                <h1 className="text-4xl font-bold text-yellow-400 mb-4">📚 Welcome to My Library</h1>
+                <h1 className="text-4xl font-bold text-[#F54927] mb-4">📚 Welcome to My Library</h1>
                 <p className="text-lg mb-6 opacity-80">
                     It is a not fully completed library management system yet, stay updated!
                 </p>
